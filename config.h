@@ -6,7 +6,6 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 2;
 
 /*
@@ -111,8 +110,10 @@ unsigned int tabspaces = 8;
 float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
+/* Gruvbox medium color scheme */
 static const char *colorname[] = {
-	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
+	/* 8 normal colors */
+	"#282828",
 	"#cc241d",
 	"#98971a",
 	"#d79921",
@@ -120,6 +121,8 @@ static const char *colorname[] = {
 	"#b16286",
 	"#689d6a",
 	"#a89984",
+
+	/* 8 bright colors */
 	"#928374",
 	"#fb4934",
 	"#b8bb26",
@@ -128,12 +131,12 @@ static const char *colorname[] = {
 	"#d3869b",
 	"#8ec07c",
 	"#ebdbb2",
+
 	[255] = 0,
+
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#add8e6", /* 256 -> cursor */
-	"#555555", /* 257 -> rev cursor*/
-	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+	"black",
+	"white",
 };
 
 
@@ -141,10 +144,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 259;
-unsigned int defaultbg = 258;
-unsigned int defaultcs = 256;
-unsigned int defaultrcs = 257;
+unsigned int defaultfg = 15;
+unsigned int defaultbg = 0;
+static unsigned int defaultcs = 15;
+static unsigned int defaultrcs = 0;
 
 /*
  * Default shape of cursor
@@ -180,7 +183,6 @@ static unsigned int defaultattr = 11;
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
-		{ "fontalt0",     STRING,  &font2[0] },
 		{ "color0",       STRING,  &colorname[0] },
 		{ "color1",       STRING,  &colorname[1] },
 		{ "color2",       STRING,  &colorname[2] },
